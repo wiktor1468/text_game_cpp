@@ -1,6 +1,7 @@
 #include <iostream> // Include the I/O stream library for input and output
 #include "Player.h"
 #include "Dragon.h"
+#include "random"
 
 int exploreStage=0;
 void interactWithNPC(const std::string& npcName, Player* player) {
@@ -92,9 +93,12 @@ void fightDragon(Player* player) {
             Dragon("Bad","Unwanted thoughts"),
             Dragon("Sus","none:p")
     };
-    int random = rand()%3;
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(1,3); // distribution in range [1, 3]
 
-    Dragon RandomDragon = dragons[random];
+
+    Dragon RandomDragon = dragons[dist6(rng)];
     std::cout << "A wild " << RandomDragon.type << " dragon appears!" << std::endl;
     RandomDragon.attack();
     std::cout << "You can either:" << std::endl;
@@ -132,7 +136,7 @@ void fightDragon(Player* player) {
         std::cout << "Invalid choice, the dragon attacks you!" << std::endl;
         player->health -= 20;
         std::cout << "Health lost: -20" << std::endl;
-        player->damageTaken();
+        player->damageTaken(20);
     }
     exploreStage++;
 }
@@ -150,7 +154,7 @@ void battleWithBoss(Player* player, bool isSecondRound = false) {
         std::cout << "An ultimately wild " << FinallDragon.type << " dragon appears! Wow, he is so strong" << std::endl;
         FinallDragon.attack();
 
-        player->health -= 20;
+        player->damageTaken(20);
         std::cout << "He is so strong that you lose health just by looking at him" << std::endl;
         std::cout << "Health lost: -20" << std::endl;
     }
@@ -192,7 +196,7 @@ void battleWithBoss(Player* player, bool isSecondRound = false) {
             break;
         default:
             std::cout << "Invalid choice, the dragon attacks you!" << std::endl;
-            player->health -= 20;
+            player->damageTaken(20);
             std::cout << "Health lost: -20" << std::endl;
             if (player->health <= 0) {
                 std::cout << "You died. That's very sad, goodbye" << std::endl;
@@ -260,6 +264,7 @@ int main()
 
     while (exploring) {
         std::cout << "--------------------------------------------------------" << std::endl;
+        player->showHealth();
         std::cout << "Where will " << player->name << " go next?" << std::endl;
         std::cout << "1. Moonlight Markets\n2. Grand Library\n3. Shimmering Lake\n4. Fight a dragon\n5. Rescue mission\n6. Show inventory\n7. Show skills\n8. Exit" << std::endl;
 

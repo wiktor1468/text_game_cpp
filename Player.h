@@ -51,15 +51,19 @@ public:
         }
     }
 
-    bool checkIfallive() const {
-        return health>20;
-    }
-
-    int damageTaken(){
-        if(!checkIfallive()){
+    void damageTaken(int damage){
+        if(health-damage<1){
             std::cout <<  "You died. That's very sad, goodbye" << std::endl;
             exit(0);
         }
+        else{
+            health-=damage;
+        }
+    }
+
+    void showHealth()
+    {
+        std::cout<<"Your health: "<< health <<std::endl;
     }
 };
 
