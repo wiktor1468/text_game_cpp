@@ -50,6 +50,15 @@ public:
             std::cout << "Inventory is full! Cannot add " << item << "." << std::endl;
         }
     }
+    void buyItem(const std::string& item, int requirements){
+        if (requirements<= xp){
+            addItem(item);
+        }
+        else{
+            std::cout<<"Level too low"<<std::endl;
+        }
+
+    }
 
     void damageTaken(int damage){
         if(health-damage<1){

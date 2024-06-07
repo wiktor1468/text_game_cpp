@@ -266,12 +266,16 @@ int main()
         std::cout << "--------------------------------------------------------" << std::endl;
         player->showHealth();
         std::cout << "Where will " << player->name << " go next?" << std::endl;
-        std::cout << "1. Moonlight Markets\n2. Grand Library\n3. Shimmering Lake\n4. Fight a dragon\n5. Rescue mission\n6. Show inventory\n7. Show skills\n8. Exit" << std::endl;
+        std::cout << "1. Moonlight Markets\n2. Grand Library\n"
+                     "3. Shimmering Lake\n4. Fight a dragon\n"
+                     "5. Rescue mission\n6. Show inventory\n"
+                     "7. Show skills\n8. Exit\n"
+                     "9. Buy items\n"<< std::endl;
 
         //If player gain some xp and will take party in at least three exercises,
         // the finall boss fight will occur as a possibility
         if (exploreStage > 3) {
-            std::cout << "9. Suspicious quest" << std::endl;
+            std::cout << "10. Suspicious quest" << std::endl;
         }
 
         std::cout << "Please enter your choice: ";
@@ -302,6 +306,24 @@ int main()
                 exploring = false;
                 break;
             case 9:
+                std::cout<<"You can buy:"<<std::endl;
+                std::cout<<"1. Banan sword, 50xp\n2.Lolipop, 1xp"<<std::endl;
+                int itemChoice;
+                std::cin>>itemChoice;
+                switch (itemChoice){
+                    case 1:
+                        player->buyItem("Banan sword",50);
+                        break;
+                    case 2:
+                        player->buyItem("Lolipop", 1);
+                        break;
+                    default:
+                        std::cout << "You did not enter a valid choice11." << std::endl;
+                }
+
+
+
+            case 10:
                 if (exploreStage > 3) {
                     suspiciousQuest(player);
                 } else {
