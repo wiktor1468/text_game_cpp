@@ -112,10 +112,12 @@ void fightDragon(Player* player) {
     if (choice == 1) {
         std::cout << "You use the water hose to weaken the dragon's flames." << std::endl;
         player->xp += 20;
+        player->gold +=10;
         std::cout << "Experience gained: 20" << std::endl;
     } else if (choice == 2) {
         std::cout << "You use the Dragon Slayer's Axe to strike at the dragon. It's very effective!" << std::endl;
         player->xp += 30;
+        player->gold +=15;
         std::cout << "Experience gained: 30" << std::endl;
     } else if (choice == 3) {
         std::cout << "You use the fire extinguisher to douse the dragon's flames. It's moderately effective." << std::endl;
@@ -124,6 +126,7 @@ void fightDragon(Player* player) {
     } else if (choice==4 && player->xp >20){
         std::cout << "You use the water pump to avoid  dragon's flames. It's pretty dope." << std::endl;
         player->xp += 40;
+        player->gold +=30;
         std::cout << "Experience gained: 40" << std::endl;
 
     }
@@ -173,21 +176,25 @@ void battleWithBoss(Player* player, bool isSecondRound = false) {
         case 1:
             std::cout << "You use the water hose to weaken the dragon's flames." << std::endl;
             player->xp += 50;
+            player->gold +=30;
             std::cout << "Experience gained: 50" << std::endl;
             break;
         case 2:
             std::cout << "You use the Dragon Slayer's Axe to strike at the dragon. It's very effective!" << std::endl;
             player->xp += 30;
+            player->gold +=15;
             std::cout << "Experience gained: 30" << std::endl;
             break;
         case 3:
             std::cout << "You use the fire extinguisher to douse the dragon's flames. It's moderately effective." << std::endl;
             player->xp += 10;
+            player->gold +=10;
             std::cout << "Experience gained: 10" << std::endl;
             break;
         case 4:
             std::cout << "You use the water pump to avoid the dragon's flames. It's pretty dope." << std::endl;
             player->xp += 80;
+            player->gold +=20;
             std::cout << "Experience gained: 80" << std::endl;
             break;
         case 5:
@@ -211,6 +218,10 @@ void finallFight(Player* player) {
     std::cout << "The first round was tough. However, the developer of this game planned a second round for you (you're welcome)" << std::endl;
     battleWithBoss(player, true);
     std::cout << "Nice, you have won" << std::endl;
+    std::cout << "You gain 100 gold and 210 xp"<<std::endl;
+    player->xp +=210;
+    player->gold +=100;
+
 }
 
 void checkEndings(Player* player) {
@@ -257,7 +268,7 @@ int main()
     std::cout << "Enter player name: ";
     std::cin >> playerName;
 
-    Player* player = new Player(playerName, 100, 0);
+    auto* player = new Player(playerName, 100, 0,10);
     player->skills["Firefighting"] = 1;
 
     bool exploring = true;
@@ -265,6 +276,7 @@ int main()
     while (exploring) {
         std::cout << "--------------------------------------------------------" << std::endl;
         player->showHealth();
+        player ->showGold();
         std::cout << "Where will " << player->name << " go next?" << std::endl;
         std::cout << "1. Moonlight Markets\n2. Grand Library\n"
                      "3. Shimmering Lake\n4. Fight a dragon\n"
@@ -312,10 +324,10 @@ int main()
                 std::cin>>itemChoice;
                 switch (itemChoice){
                     case 1:
-                        player->buyItem("Banan sword",50);
+                        player->buyItem("Banan sword",50,10);
                         break;
                     case 2:
-                        player->buyItem("Lolipop", 1);
+                        player->buyItem("Lolipop", 1,0);
                         break;
                     default:
                         std::cout << "You did not enter a valid choice11." << std::endl;

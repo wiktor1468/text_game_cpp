@@ -15,11 +15,13 @@ public:
     int xp;
     std::string inventory[10];  // An array of strings for the player's inventory
     int inventoryCount = 0;
+    int gold;
     std::map<std::string, int> skills;
-    Player(std::string name, int health, int xp){
+    Player(std::string name, int health, int xp, int gold){
         this->name = name;
         this->health = health;
         this->xp = xp;
+        this->gold = gold;
     }
 
 
@@ -28,6 +30,9 @@ public:
         for (const auto& item : inventory) {
             std::cout << "- " << item << std::endl;
         }
+    }
+    void showGold() const{
+        std::cout << "You have "<<gold<<"gold"<<std::endl;
     }
 
     void showSkills() const {
@@ -50,8 +55,8 @@ public:
             std::cout << "Inventory is full! Cannot add " << item << "." << std::endl;
         }
     }
-    void buyItem(const std::string& item, int requirements){
-        if (requirements<= xp){
+    void buyItem(const std::string& item, int requiredXP, int price){
+        if (requiredXP<= xp  && price <=gold){
             addItem(item);
         }
         else{
