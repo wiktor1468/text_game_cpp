@@ -319,7 +319,10 @@ int main()
                 break;
             case 9:
                 std::cout<<"You can buy:"<<std::endl;
-                std::cout<<"1. Banan sword, 50xp\n2.Lolipop, 1xp"<<std::endl;
+                std::cout<<"1. Banan sword, 50xp, 10 gold\n2.Lolipop, 1xp, 0 gold\n"<<std::endl;
+                if (exploreStage>=3){
+                    std::cout<<"3. CS's knife, 100xp, 100 gold\n"<<std::endl;
+                }
                 int itemChoice;
                 std::cin>>itemChoice;
                 switch (itemChoice){
@@ -328,6 +331,9 @@ int main()
                         break;
                     case 2:
                         player->buyItem("Lolipop", 1,0);
+                        break;
+                    case 3:
+                        player->buyItem("CS's knife", 100,100);
                         break;
                     default:
                         std::cout << "You did not enter a valid choice11." << std::endl;
@@ -338,12 +344,10 @@ int main()
             case 10:
                 if (exploreStage > 3) {
                     suspiciousQuest(player);
-                } else {
-                    std::cout << "You did not enter a valid choice." << std::endl;
                 }
                 break;
             default:
-                std::cout << "You did not enter a valid choice." << std::endl;
+                std::cout << "You did not enter a valid choice2." << std::endl;
         }
     }
 

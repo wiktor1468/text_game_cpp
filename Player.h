@@ -8,6 +8,7 @@
 
 #include <string>
 #include <map>
+#include <algorithm> // for std::find
 class Player{
 public:
     std::string name;
@@ -61,6 +62,19 @@ public:
         }
         else{
             std::cout<<"Level too low"<<std::endl;
+        }
+
+    }
+    bool containsItem( std::string item) const {
+        return inventory.find(item) != std::string::npos;
+    }
+    void sellItem(const std::string& item){
+        bool isItemFound = false;
+        auto it = std::find(inventory->begin(), inventory->end(),item);
+        if (it != inventory.end()) {
+            std::cout << "Item found in inventory." << std::endl;
+        } else {
+            std::cout << "Item not found in inventory." << std::endl;
         }
 
     }
