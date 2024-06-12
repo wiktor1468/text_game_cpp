@@ -65,18 +65,20 @@ public:
         }
 
     }
-    bool containsItem( std::string item) const {
-        return inventory.find(item) != std::string::npos;
+    bool containsItem(const std::string& item) const {
+        return std::find(std::begin(inventory), std::end(inventory), item) != std::end(inventory);
     }
-    void sellItem(const std::string& item){
-        bool isItemFound = false;
-        auto it = std::find(inventory->begin(), inventory->end(),item);
-        if (it != inventory.end()) {
+
+    void sellItem(const std::string& item) {
+        auto it = std::find(std::begin(inventory), std::end(inventory), item);
+        if (it != std::end(inventory)) {
             std::cout << "Item found in inventory." << std::endl;
+            // Code to handle selling the item
+            *it = "";  // Clear the item from the inventory
+            std::cout << "Item sold and removed from inventory." << std::endl;
         } else {
             std::cout << "Item not found in inventory." << std::endl;
         }
-
     }
 
     void damageTaken(int damage){
