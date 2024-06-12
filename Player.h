@@ -65,16 +65,15 @@ public:
         }
 
     }
-    bool containsItem(const std::string& item) const {
-        return std::find(std::begin(inventory), std::end(inventory), item) != std::end(inventory);
-    }
+
 
     void sellItem(const std::string& item) {
-        auto it = std::find(std::begin(inventory), std::end(inventory), item);
-        if (it != std::end(inventory)) {
+        //return the index of found value or __last if value hasn't been found
+        auto possibleItem = std::find(std::begin(inventory), std::end(inventory), item);
+        if (possibleItem != std::end(inventory)) {
             std::cout << "Item found in inventory." << std::endl;
-            // Code to handle selling the item
-            *it = "";  // Clear the item from the inventory
+            // removing item from array
+            *possibleItem = "";
             std::cout << "Item sold and removed from inventory." << std::endl;
         } else {
             std::cout << "Item not found in inventory." << std::endl;

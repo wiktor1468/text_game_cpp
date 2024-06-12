@@ -1,4 +1,5 @@
 #include <iostream> // Include the I/O stream library for input and output
+#include "string"
 #include "Player.h"
 #include "Dragon.h"
 #include "random"
@@ -282,7 +283,8 @@ int main()
                      "3. Shimmering Lake\n4. Fight a dragon\n"
                      "5. Rescue mission\n6. Show inventory\n"
                      "7. Show skills\n8. Exit\n"
-                     "9. Buy items\n"<< std::endl;
+                     "8. Buy items\n"
+                     "9. Sell items\n"<< std::endl;
 
         //If player gain some xp and will take party in at least three exercises,
         // the finall boss fight will occur as a possibility
@@ -314,10 +316,8 @@ int main()
             case 7:
                 player->showSkills();
                 break;
+
             case 8:
-                exploring = false;
-                break;
-            case 9:
                 std::cout<<"You can buy:"<<std::endl;
                 std::cout<<"1. Banan sword, 50xp, 10 gold\n2.Lolipop, 1xp, 0 gold\n"<<std::endl;
                 if (exploreStage>=3){
@@ -338,6 +338,18 @@ int main()
                     default:
                         std::cout << "You did not enter a valid choice11." << std::endl;
                 }
+
+
+            case 9:
+                std::cout<<"You can sell items:"<<std::endl;
+                player->showInventory();
+                std::cout<<"Choose item you want to sell"<<std::endl;
+                std::string itemToSell;
+                std::cin>>itemChoice;
+                player->sellItem(itemToSell);
+
+
+                break;
 
 
 
