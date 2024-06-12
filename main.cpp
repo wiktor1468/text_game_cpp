@@ -262,8 +262,7 @@ void suspiciousQuest(Player* player) {
 
 
 // Main function, the starting point of the program
-int main()
-{
+int main() {
     std::string playerName;
     std::cout << "Welcome to the Dragon Realm!" << std::endl;
     std::cout << "Enter player name: ";
@@ -274,22 +273,24 @@ int main()
 
     bool exploring = true;
 
+
     while (exploring) {
         std::cout << "--------------------------------------------------------" << std::endl;
         player->showHealth();
-        player ->showGold();
+        player->showGold();
         std::cout << "Where will " << player->name << " go next?" << std::endl;
         std::cout << "1. Moonlight Markets\n2. Grand Library\n"
                      "3. Shimmering Lake\n4. Fight a dragon\n"
                      "5. Rescue mission\n6. Show inventory\n"
-                     "7. Show skills\n8. Exit\n"
+                     "7. Show skills\n"
                      "8. Buy items\n"
-                     "9. Sell items\n"<< std::endl;
+                     "9. Sell items\n"
+                     "10. Exit\n";
 
-        //If player gain some xp and will take party in at least three exercises,
-        // the finall boss fight will occur as a possibility
+        // If player has gained some XP and participated in at least three activities,
+        // the final boss fight will be available as an option
         if (exploreStage > 3) {
-            std::cout << "10. Suspicious quest" << std::endl;
+            std::cout << "11. Suspicious quest" << std::endl;
         }
 
         std::cout << "Please enter your choice: ";
@@ -298,11 +299,13 @@ int main()
 
         switch (choice) {
             case 1:
+                exploreLocation("Moonlight Markets", player);
+                break;
             case 2:
+                exploreLocation("Grand Library", player);
+                break;
             case 3:
-                if (choice == 1) exploreLocation("Moonlight Markets", player);
-                else if (choice == 2) exploreLocation("Grand Library", player);
-                else if (choice == 3) exploreLocation("Shimmering Lake", player);
+                exploreLocation("Shimmering Lake", player);
                 break;
             case 4:
                 fightDragon(player);
@@ -316,53 +319,60 @@ int main()
             case 7:
                 player->showSkills();
                 break;
-
-            case 8:
-                std::cout<<"You can buy:"<<std::endl;
-                std::cout<<"1. Banan sword, 50xp, 10 gold\n2.Lolipop, 1xp, 0 gold\n"<<std::endl;
-                if (exploreStage>=3){
-                    std::cout<<"3. CS's knife, 100xp, 100 gold\n"<<std::endl;
+            case 8: {
+                std::cout << "You can buy:\n"
+                          << "1. Banan sword, 50xp, 10 gold\n"
+                          << "2. Lollipop, 1xp, 0 gold\n";
+                if (exploreStage >= 3) {
+                    std::cout << "3. CS's knife, 100xp, 100 gold\n";
                 }
+                std::cout << "Please enter your choice: ";
                 int itemChoice;
-                std::cin>>itemChoice;
-                switch (itemChoice){
+                std::cin >> itemChoice;
+                switch (itemChoice) {
                     case 1:
-                        player->buyItem("Banan sword",50,10);
+                        player->buyItem("Banan sword", 50, 10);
                         break;
                     case 2:
-                        player->buyItem("Lolipop", 1,0);
+                        player->buyItem("Lollipop", 1, 0);
                         break;
                     case 3:
-                        player->buyItem("CS's knife", 100,100);
+                        if (exploreStage >= 3) {
+                            player->buyItem("CS's knife", 100, 100);
+                        } else {
+                            std::cout << "You did not enter a valid choice." << std::endl;
+                        }
                         break;
                     default:
-                        std::cout << "You did not enter a valid choice11." << std::endl;
+                        std::cout << "You did not enter a valid choice." << std::endl;
                 }
-
-
-            case 9:
-                std::cout<<"You can sell items:"<<std::endl;
+                break; // Exit the 'Buy items' switch
+            }
+            case 9: {
+                std::cout << "You can sell items:\n";
                 player->showInventory();
-                std::cout<<"Choose item you want to sell"<<std::endl;
+                std::cout << "Choose the item you want to sell: ";
                 std::string itemToSell;
-                std::cin>>itemChoice;
+                std::cin >> itemToSell;
                 player->sellItem(itemToSell);
-
-
-                break;
-
-
-
+                break; // Exit the 'Sell items' case
+            }
             case 10:
+                exploring = false; // Exit the main loop
+                break;
+            case 11: {
                 if (exploreStage > 3) {
                     suspiciousQuest(player);
+                } else {
+                    std::cout << "You did not enter a valid choice." << std::endl;
                 }
                 break;
+            }
             default:
-                std::cout << "You did not enter a valid choice2." << std::endl;
+                std::cout << "You did not enter a valid choice." << std::endl;
         }
     }
 
-    delete player;
+    delete player; // Clean up dynamic memory
     return 0;
 }
