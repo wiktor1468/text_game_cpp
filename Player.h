@@ -23,6 +23,8 @@ public:
         this->health = health;
         this->xp = xp;
         this->gold = gold;
+        // Initialize inventory with empty strings
+        std::fill(std::begin(inventory), std::end(inventory), "");
     }
 
 

@@ -300,12 +300,15 @@ int main() {
         switch (choice) {
             case 1:
                 exploreLocation("Moonlight Markets", player);
+                exploreStage++;
                 break;
             case 2:
                 exploreLocation("Grand Library", player);
+                exploreStage++;
                 break;
             case 3:
                 exploreLocation("Shimmering Lake", player);
+                exploreStage++;
                 break;
             case 4:
                 fightDragon(player);
@@ -353,9 +356,10 @@ int main() {
                 player->showInventory();
                 std::cout << "Choose the item you want to sell: ";
                 std::string itemToSell;
-                std::cin >> itemToSell;
+                std::cin.ignore();  // Clear the newline character left by std::cin >> choice
+                std::getline(std::cin, itemToSell);
                 player->sellItem(itemToSell);
-                break; // Exit the 'Sell items' case
+                break;
             }
             case 10:
                 exploring = false; // Exit the main loop
