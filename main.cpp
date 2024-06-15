@@ -3,8 +3,29 @@
 #include "Player.h"
 #include "Dragon.h"
 #include "random"
+#include "cstdlib"
+#include "conio.h"
+
 
 int exploreStage=0;
+void displayChoices()
+{
+    std::cout << "--------------------------------------------------------" << std::endl;
+
+    std::cout << "1. Moonlight Markets\n2. Grand Library\n"
+                 "3. Shimmering Lake\n4. Fight a dragon\n"
+                 "5. Rescue mission\n6. Show inventory\n"
+                 "7. Show skills\n"
+                 "8. Buy items\n"
+                 "9. Sell items\n"
+                 "10. Exit\n";
+
+    // If player has gained some XP and participated in at least three activities,
+    // the final boss fight will be available as an option
+    if (exploreStage > 3) {
+        std::cout << "11. Suspicious quest" << std::endl;
+    }
+}
 void interactWithNPC(const std::string& npcName, Player* player) {
     std::cout << npcName << ": Hello, " << player->name << "! I've heard about your bravery." << std::endl;
     std::cout << npcName << ": Would you like a special tool to help in your fight against the dragons?" << std::endl;
@@ -273,29 +294,21 @@ int main() {
 
     bool exploring = true;
 
+    system("cls");
 
     while (exploring) {
-        std::cout << "--------------------------------------------------------" << std::endl;
         player->showHealth();
         player->showGold();
         std::cout << "Where will " << player->name << " go next?" << std::endl;
-        std::cout << "1. Moonlight Markets\n2. Grand Library\n"
-                     "3. Shimmering Lake\n4. Fight a dragon\n"
-                     "5. Rescue mission\n6. Show inventory\n"
-                     "7. Show skills\n"
-                     "8. Buy items\n"
-                     "9. Sell items\n"
-                     "10. Exit\n";
-
-        // If player has gained some XP and participated in at least three activities,
-        // the final boss fight will be available as an option
-        if (exploreStage > 3) {
-            std::cout << "11. Suspicious quest" << std::endl;
-        }
+        displayChoices();
 
         std::cout << "Please enter your choice: ";
         int choice;
         std::cin >> choice;
+
+
+        system("cls");
+        displayChoices();
 
         switch (choice) {
             case 1:
@@ -374,7 +387,11 @@ int main() {
             }
             default:
                 std::cout << "You did not enter a valid choice." << std::endl;
+
+
         }
+
+
     }
 
     delete player; // Clean up dynamic memory
