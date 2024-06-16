@@ -109,18 +109,19 @@ void exploreLocation(const std::string& location, Player* player) {
 
 void fightDragon(Player* player) {
 
-    //array of Dragons to choose random Dragon to fight innteraction
+    //array of Dragons to choose random Dragon to fight
     Dragon dragons[]={
-            Dragon("Fire", "Flame Burst"),
-            Dragon("Bad","Unwanted thoughts"),
-            Dragon("Sus","none:p")
+            Dragon("Fire", "Flame Burst",1),
+            Dragon("Bad","Unwanted thoughts",1.2),
+            Dragon("Sus","none:p",0.7)
     };
+    //choosing random dragon
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist6(1,3); // distribution in range [1, 3]
+    std::uniform_int_distribution<std::mt19937::result_type> dist3(1,3); // distribution in range [1, 3]
 
 
-    Dragon RandomDragon = dragons[dist6(rng)];
+    Dragon RandomDragon = dragons[dist3(rng)];
     std::cout << "A wild " << RandomDragon.type << " dragon appears!" << std::endl;
     RandomDragon.attack();
     std::cout << "You can either:" << std::endl;
@@ -159,7 +160,7 @@ void fightDragon(Player* player) {
     }
     else {
         std::cout << "Invalid choice, the dragon attacks you!" << std::endl;
-        player->health -= 20;
+        player->health -= 20*RandomDragon.powerMultiplier;
         std::cout << "Health lost: -20" << std::endl;
         player->damageTaken(20);
     }
@@ -175,7 +176,7 @@ void battleWithBoss(Player* player, bool isSecondRound = false) {
     if (isSecondRound) {
         std::cout << "The big boss wants a second run!" << std::endl;
     } else {
-        Dragon FinallDragon("Boss", "all");
+        Dragon FinallDragon("Boss", "all",2);
         std::cout << "An ultimately wild " << FinallDragon.type << " dragon appears! Wow, he is so strong" << std::endl;
         FinallDragon.attack();
 
@@ -307,13 +308,14 @@ int main() {
         std::cin >> choice;
 
 
-        system("cls");
-        displayChoices();
+
+
 
         switch (choice) {
             case 1:
                 exploreLocation("Moonlight Markets", player);
                 exploreStage++;
+                system("cls");
                 break;
             case 2:
                 exploreLocation("Grand Library", player);
@@ -390,6 +392,7 @@ int main() {
 
 
         }
+
 
 
     }

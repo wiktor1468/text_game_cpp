@@ -12,9 +12,10 @@ class Dragon {
 public:
     std::string type;
     std::string specialAbility;
+    float powerMultiplier;
 
-    Dragon(const std::string& dragonType, const std::string& ability)
-            : type(dragonType), specialAbility(ability) {}
+    Dragon(const std::string& dragonType, const std::string& ability, float multiplier)
+            : type(dragonType), specialAbility(ability), powerMultiplier(multiplier) {}
 
     void attack() const {
         std::cout << "The " << type << " dragon have " << specialAbility << " ability. Wow that's insane!" << std::endl;

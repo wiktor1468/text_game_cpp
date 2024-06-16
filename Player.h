@@ -12,13 +12,13 @@
 class Player{
 public:
     std::string name;
-    int health;
+    float health;
     int xp;
     std::string inventory[10];  // An array of strings for the player's inventory
     int inventoryCount = 0;
     int gold;
     std::map<std::string, int> skills;
-    Player(std::string name, int health, int xp, int gold){
+    Player(const std::string name, float health, int xp, int gold){
         this->name = name;
         this->health = health;
         this->xp = xp;
