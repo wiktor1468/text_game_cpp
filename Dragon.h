@@ -13,12 +13,25 @@ public:
     std::string type;
     std::string specialAbility;
     float powerMultiplier;
+    int dragonHealth;
 
-    Dragon(const std::string& dragonType, const std::string& ability, float multiplier)
-            : type(dragonType), specialAbility(ability), powerMultiplier(multiplier) {}
+    Dragon(const std::string& dragonType, const std::string& ability, float multiplier, int health)
+            : type(dragonType), specialAbility(ability), powerMultiplier(multiplier), dragonHealth(health) {}
 
     void attack() const {
         std::cout << "The " << type << " dragon have " << specialAbility << " ability. Wow that's insane!" << std::endl;
+    }
+
+    void takeDamage(int damage){
+        dragonHealth -=damage;
+        if(dragonHealth<0)
+            printf("Dragon died, nice");
+        else {
+            printf("Try harder\n");
+            std::cout<<"Remain health: "<<dragonHealth<<"\n"<<std::endl;
+            printf("");
+        }
+
     }
 };
 

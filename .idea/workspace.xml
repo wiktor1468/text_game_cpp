@@ -18,11 +18,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a3046a5-b786-4da4-af7b-785a959f5879" name="Changes" comment="clear console after an interaction">
+    <list default="true" id="2a3046a5-b786-4da4-af7b-785a959f5879" name="Changes" comment="multiplier of power &amp; display fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dragon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Dragon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/main.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +110,8 @@
       <workItem from="1718223176392" duration="3965000" />
       <workItem from="1718397452786" duration="1812000" />
       <workItem from="1718483192952" duration="2567000" />
-      <workItem from="1718561647604" duration="975000" />
+      <workItem from="1718561647604" duration="1443000" />
+      <workItem from="1719088620979" duration="822000" />
     </task>
     <task id="LOCAL-00001" summary="move repo to own repo">
       <option name="closed" value="true" />
@@ -210,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718485709419</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="multiplier of power &amp; display fix">
+      <option name="closed" value="true" />
+      <created>1718564164075</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1718564164075</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +251,7 @@
     <MESSAGE value="loop fix" />
     <MESSAGE value="sell item fixed" />
     <MESSAGE value="clear console after an interaction" />
-    <option name="LAST_COMMIT_MESSAGE" value="clear console after an interaction" />
+    <MESSAGE value="multiplier of power &amp; display fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="multiplier of power &amp; display fix" />
   </component>
 </project>

@@ -111,9 +111,9 @@ void fightDragon(Player* player) {
 
     //array of Dragons to choose random Dragon to fight
     Dragon dragons[]={
-            Dragon("Fire", "Flame Burst",1),
-            Dragon("Bad","Unwanted thoughts",1.2),
-            Dragon("Sus","none:p",0.7)
+            Dragon("Fire", "Flame Burst",1, 20),
+            Dragon("Bad","Unwanted thoughts",1.2, 30),
+            Dragon("Sus","none:p",0.7,30)
     };
     //choosing random dragon
     std::random_device dev;
@@ -134,6 +134,7 @@ void fightDragon(Player* player) {
     std::cin >> choice;
     if (choice == 1) {
         std::cout << "You use the water hose to weaken the dragon's flames." << std::endl;
+        RandomDragon.takeDamage(20);
         player->xp += 20;
         player->gold +=10;
         std::cout << "Experience gained: 20" << std::endl;
@@ -176,7 +177,7 @@ void battleWithBoss(Player* player, bool isSecondRound = false) {
     if (isSecondRound) {
         std::cout << "The big boss wants a second run!" << std::endl;
     } else {
-        Dragon FinallDragon("Boss", "all",2);
+        Dragon FinallDragon("Boss", "all",2, 213);
         std::cout << "An ultimately wild " << FinallDragon.type << " dragon appears! Wow, he is so strong" << std::endl;
         FinallDragon.attack();
 
