@@ -22,14 +22,23 @@ public:
         std::cout << "The " << type << " dragon have " << specialAbility << " ability. Wow that's insane!" << std::endl;
     }
 
+    void showHealth(){
+        std::cout<<"WOW Remain health: "<<dragonHealth<<"\n"<<std::endl;
+    }
+
+    bool checkIfDragonAlive(){
+        //if alive return true
+        return dragonHealth>0;
+    }
     void takeDamage(int damage){
         dragonHealth -=damage;
-        if(dragonHealth<0)
+        if(!checkIfDragonAlive())
             printf("Dragon died, nice");
         else {
             printf("Try harder\n");
             std::cout<<"Remain health: "<<dragonHealth<<"\n"<<std::endl;
             printf("");
+
         }
 
     }

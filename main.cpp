@@ -107,13 +107,55 @@ void exploreLocation(const std::string& location, Player* player) {
 }
 
 
+void anotherRoundOfFight(Player *player, Dragon RandomDragon){
+    RandomDragon.showHealth();
+
+    std::cout << "You can either:" << std::endl;
+    std::cout << "1. Use water hose\n"
+                 "2. Use Dragon Slayer's Axe\n"
+                 "3. Use fire extinguisher\n"
+                 "4. Use Water pump"
+              << std::endl;
+    int choice;
+    std::cin >> choice;
+    if (choice == 1) {
+        std::cout << "You use the water hose to weaken the dragon's flames." << std::endl;
+        RandomDragon.takeDamage(20);
+
+    } else if (choice == 2) {
+        std::cout << "You use the Dragon Slayer's Axe to strike at the dragon. It's very effective!" << std::endl;
+        RandomDragon.takeDamage(30);
+
+    } else if (choice == 3) {
+        std::cout << "You use the fire extinguisher to douse the dragon's flames. It's moderately effective." << std::endl;
+        RandomDragon.takeDamage(25);
+
+    } else if (choice==4 && player->xp >20){
+        std::cout << "You use the water pump to avoid  dragon's flames. It's pretty dope." << std::endl;
+        RandomDragon.takeDamage(35);
+
+
+    }
+    else if (choice==4 && player->xp <=20)
+    {
+        std::cout << "You  can't use the water pump to avoid  dragon's flames. It's sad but your exp is too low." << std::endl;
+
+    }
+    else {
+        std::cout << "Invalid choice, the dragon attacks you!" << std::endl;
+        player->health -= 20*RandomDragon.powerMultiplier;
+        std::cout << "Health lost: -20" << std::endl;
+        player->damageTaken(20);
+    }
+}
+
 void fightDragon(Player* player) {
 
     //array of Dragons to choose random Dragon to fight
     Dragon dragons[]={
-            Dragon("Fire", "Flame Burst",1, 20),
-            Dragon("Bad","Unwanted thoughts",1.2, 30),
-            Dragon("Sus","none:p",0.7,30)
+            Dragon("Fire", "Flame Burst",1, 200),
+            Dragon("Bad","Unwanted thoughts",1.2, 200),
+            Dragon("Sus","none:p",0.7,200)
     };
     //choosing random dragon
     std::random_device dev;
@@ -140,15 +182,21 @@ void fightDragon(Player* player) {
         std::cout << "Experience gained: 20" << std::endl;
     } else if (choice == 2) {
         std::cout << "You use the Dragon Slayer's Axe to strike at the dragon. It's very effective!" << std::endl;
+        RandomDragon.takeDamage(30);
         player->xp += 30;
         player->gold +=15;
         std::cout << "Experience gained: 30" << std::endl;
     } else if (choice == 3) {
         std::cout << "You use the fire extinguisher to douse the dragon's flames. It's moderately effective." << std::endl;
+        RandomDragon.takeDamage(25);
         player->xp += 10;
         std::cout << "Experience gained: 10" << std::endl;
     } else if (choice==4 && player->xp >20){
         std::cout << "You use the water pump to avoid  dragon's flames. It's pretty dope." << std::endl;
+        RandomDragon.takeDamage(35);
+        if (!RandomDragon.checkIfDragonAlive()){
+            anotherRoundOfFight(player,RandomDragon);
+        }
         player->xp += 40;
         player->gold +=30;
         std::cout << "Experience gained: 40" << std::endl;
@@ -167,6 +215,8 @@ void fightDragon(Player* player) {
     }
     exploreStage++;
 }
+
+
 
 
 //finall boss
