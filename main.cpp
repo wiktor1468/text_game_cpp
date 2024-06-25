@@ -149,16 +149,19 @@ void anotherRoundOfFight(Player *player, Dragon RandomDragon){
     }
 }
 
-
-int fightDragon(Player* player, int choice) {
-
-
+void possibleChoices(){
     std::cout << "You can either:" << std::endl;
     std::cout << "1. Use water hose\n"
                  "2. Use Dragon Slayer's Axe\n"
                  "3. Use fire extinguisher\n"
                  "4. Use Water pump"
               << std::endl;
+}
+
+int fightDragon(Player* player, int choice) {
+
+
+    possibleChoices();
 
     if (choice == 1) {
         std::cout << "You use the water hose to weaken the dragon's flames." << std::endl;
@@ -223,21 +226,26 @@ void fightTest(Player* player){
     std::cout << "A wild " << RandomDragon.type << " dragon appears!" << std::endl;
     RandomDragon.attack();
 
-    std::cout << "You can either:" << std::endl;
-    std::cout << "1. Use water hose\n"
-                 "2. Use Dragon Slayer's Axe\n"
-                 "3. Use fire extinguisher\n"
-                 "4. Use Water pump"
-              << std::endl;
+
 
 
 
     while(RandomDragon.dragonHealth>0){
 
         int choice;
+        possibleChoices(); //display choices
         std::cin >> choice;
+        //function returns int of damage which will 'hit' the dragon/player
         RandomDragon.takeDamage(fightDragon(player, choice));
         round++;
+
+        if(round%2){
+            std::cout<<"Dragon attacks"<<std::endl;
+            player->damageTaken(round*5);
+            player->showHealth();
+
+
+        }
 
 
 
