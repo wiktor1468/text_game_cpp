@@ -18,7 +18,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a3046a5-b786-4da4-af7b-785a959f5879" name="Changes" comment="new fight system">
+    <list default="true" id="2a3046a5-b786-4da4-af7b-785a959f5879" name="Changes" comment="fight system update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dragon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Dragon.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/main.exe" afterDir="false" />
     </list>
@@ -113,7 +115,8 @@
       <workItem from="1718561647604" duration="1443000" />
       <workItem from="1719088620979" duration="1659000" />
       <workItem from="1719176656285" duration="2327000" />
-      <workItem from="1719340232027" duration="2091000" />
+      <workItem from="1719340232027" duration="2707000" />
+      <workItem from="1719665932901" duration="2840000" />
     </task>
     <task id="LOCAL-00001" summary="move repo to own repo">
       <option name="closed" value="true" />
@@ -243,7 +246,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719341857572</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fight system update">
+      <option name="closed" value="true" />
+      <created>1719343468042</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1719343468042</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,6 +292,7 @@
     <MESSAGE value="Dragon's health system" />
     <MESSAGE value="Dragon's health system part II" />
     <MESSAGE value="new fight system" />
-    <option name="LAST_COMMIT_MESSAGE" value="new fight system" />
+    <MESSAGE value="fight system update" />
+    <option name="LAST_COMMIT_MESSAGE" value="fight system update" />
   </component>
 </project>

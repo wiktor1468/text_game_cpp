@@ -67,7 +67,8 @@ void rescueMission(Player* player) {
     }
     exploreStage++;
 }
-
+//add item which will regenerate player's health
+// and logic in finding those items in inventory and finnaly using this
 void exploreLocation(const std::string& location, Player* player) {
     std::cout << "Exploring " << location << "..." << std::endl;
     if (location == "Moonlight Markets") {
@@ -107,47 +108,7 @@ void exploreLocation(const std::string& location, Player* player) {
 }
 
 
-void anotherRoundOfFight(Player *player, Dragon RandomDragon){
-    RandomDragon.showHealth();
 
-    std::cout << "You can either:" << std::endl;
-    std::cout << "1. Use water hose\n"
-                 "2. Use Dragon Slayer's Axe\n"
-                 "3. Use fire extinguisher\n"
-                 "4. Use Water pump"
-              << std::endl;
-    int choice;
-    std::cin >> choice;
-    if (choice == 1) {
-        std::cout << "You use the water hose to weaken the dragon's flames." << std::endl;
-        RandomDragon.takeDamage(20);
-
-    } else if (choice == 2) {
-        std::cout << "You use the Dragon Slayer's Axe to strike at the dragon. It's very effective!" << std::endl;
-        RandomDragon.takeDamage(30);
-
-    } else if (choice == 3) {
-        std::cout << "You use the fire extinguisher to douse the dragon's flames. It's moderately effective." << std::endl;
-        RandomDragon.takeDamage(25);
-
-    } else if (choice==4 && player->xp >20){
-        std::cout << "You use the water pump to avoid  dragon's flames. It's pretty dope." << std::endl;
-        RandomDragon.takeDamage(35);
-
-
-    }
-    else if (choice==4 && player->xp <=20)
-    {
-        std::cout << "You  can't use the water pump to avoid  dragon's flames. It's sad but your exp is too low." << std::endl;
-
-    }
-    else {
-        std::cout << "Invalid choice, the dragon attacks you!" << std::endl;
-        player->health -= 20*RandomDragon.powerMultiplier;
-        std::cout << "Health lost: -20" << std::endl;
-        player->damageTaken(20);
-    }
-}
 
 void possibleChoices(){
     std::cout << "You can either:" << std::endl;
@@ -158,7 +119,7 @@ void possibleChoices(){
               << std::endl;
 }
 
-int fightDragon(Player* player, int choice) {
+int fightChoices(Player* player, int choice) {
 
 
     possibleChoices();
@@ -170,6 +131,8 @@ int fightDragon(Player* player, int choice) {
         player->xp += 20;
         player->gold +=10;
         std::cout << "Experience gained: 20" << std::endl;
+
+        //returns the amount of dame that will hit the dragon
         return 20;
     } else if (choice == 2) {
         std::cout << "You use the Dragon Slayer's Axe to strike at the dragon. It's very effective!" << std::endl;
@@ -177,30 +140,40 @@ int fightDragon(Player* player, int choice) {
         player->xp += 30;
         player->gold +=15;
         std::cout << "Experience gained: 30" << std::endl;
+        return 30;
     } else if (choice == 3) {
         std::cout << "You use the fire extinguisher to douse the dragon's flames. It's moderately effective." << std::endl;
         //RandomDragon.takeDamage(25);
         player->xp += 10;
         std::cout << "Experience gained: 10" << std::endl;
+
+        //returns the amount of dame that will hit the dragon
+        return 10;
     } else if (choice==4 && player->xp >20){
         std::cout << "You use the water pump to avoid  dragon's flames. It's pretty dope." << std::endl;
-        //RandomDragon.takeDamage(35);
+
 
         player->xp += 40;
         player->gold +=30;
         std::cout << "Experience gained: 40" << std::endl;
+
+        //returns the amount of dame that will hit the dragon
+        return 40;
 
     }
     else if (choice==4 && player->xp <=20)
     {
         std::cout << "You  can't use the water pump to avoid  dragon's flames. It's sad but your exp is too low." << std::endl;
         //fightDragon(player);
+        //returns the amount of dame that will hit the dragon
+        return 0;
     }
     else {
         std::cout << "Invalid choice, the dragon attacks you!" << std::endl;
         //player->health -= 20*RandomDragon.powerMultiplier;
         std::cout << "Health lost: -20" << std::endl;
         player->damageTaken(20);
+        return 0; //Dragon wont get hit
     }
     exploreStage++;
 }
@@ -235,23 +208,20 @@ void fightTest(Player* player){
         int choice;
         possibleChoices(); //display choices
         std::cin >> choice;
+
         //function returns int of damage which will 'hit' the dragon/player
-        RandomDragon.takeDamage(fightDragon(player, choice));
-        round++;
+        RandomDragon.takeDamage(fightChoices(player, choice));
 
-        if(round%2){
-            std::cout<<"Dragon attacks"<<std::endl;
-            player->damageTaken(round*5);
+
+        if(round%2 || RandomDragon.dragonHealth>0){ //it could be dead at this point
+            std::cout<<"Dragon also attacks"<<std::endl;
+            player->damageTaken(round*5*RandomDragon.powerMultiplier);
             player->showHealth();
-
-
+            printf("\n");
+            ;
         }
-
-
-
-
+        round++;
     }
-
 
 }
 

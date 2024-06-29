@@ -34,7 +34,7 @@ public:
         }
     }
     void showGold() const{
-        std::cout << "You have "<<gold<<"gold"<<std::endl;
+        std::cout << "You have "<<gold<<" gold"<<std::endl;
     }
 
     void showSkills() const {
